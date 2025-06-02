@@ -1,0 +1,31 @@
+# Task ID: 17
+# Title: Implement Game Dashboard
+# Status: pending
+# Dependencies: 8, 11, 12
+# Priority: medium
+# Description: Create the game dashboard showing current game status, target info, and quick actions using SwiftUI.
+# Details:
+1. Design and implement Game Dashboard screen with SwiftUI:
+   - Game status indicator
+   - Current target information
+   - Quick action buttons (report kill, view map, etc.)
+   - Recent activity feed
+   - Player status (alive, eliminated)
+   - Safe zone indicators
+   - Game timer/countdown
+2. Create game status service for real-time updates
+3. Implement quick action buttons with proper routing
+4. Add activity feed component using List
+5. Create game timer with countdown using Timer publisher
+6. Implement player status visualization
+7. Add refresh functionality for latest game state using pull-to-refresh
+
+# Test Strategy:
+1. Test dashboard rendering with different game states
+2. Verify quick action functionality
+3. Test activity feed updates
+4. Verify game timer accuracy
+5. Test player status visualization
+6. Verify refresh functionality
+7. Test dashboard with various screen sizes
+8. Use XCUITest for UI testing of dashboard screens

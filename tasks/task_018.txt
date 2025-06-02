@@ -1,0 +1,36 @@
+# Task ID: 18
+# Title: Implement Game Admin Controls
+# Status: pending
+# Dependencies: 7, 8
+# Priority: medium
+# Description: Create the admin controls for managing games, including starting, pausing, and ending games using SwiftUI.
+# Details:
+1. Create game admin service with methods:
+   - startGame(gameId)
+   - pauseGame(gameId)
+   - resumeGame(gameId)
+   - endGame(gameId)
+   - broadcastMessage(gameId, message)
+   - managePlayer(gameId, playerId, action)
+2. Design and implement Game Admin screen with SwiftUI:
+   - Game status controls
+   - Player management
+   - Safe zone management
+   - Broadcast message functionality
+   - Game settings modification
+   - Emergency controls
+3. Add admin verification for privileged actions
+4. Implement confirmation dialogs for critical actions using confirmationDialog
+5. Create broadcast messaging system
+6. Add player management interface with swipe actions
+7. Implement game results generation
+
+# Test Strategy:
+1. Unit test game admin service methods using XCTest
+2. Test game status control actions
+3. Verify player management functionality
+4. Test broadcast messaging
+5. Verify admin verification
+6. Test emergency controls
+7. Verify game results generation
+8. Use XCUITest for UI testing of admin screens

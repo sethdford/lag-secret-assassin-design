@@ -1,0 +1,39 @@
+# Task ID: 14
+# Title: Implement Real-time Notification System
+# Status: pending
+# Dependencies: 3, 5
+# Priority: medium
+# Description: Create the comprehensive notification system for game events, target assignments, kills, and admin messages using APNs.
+# Details:
+1. Integrate Apple Push Notification service (APNs)
+2. Create notification service with methods:
+   - registerDevice(token)
+   - sendNotification(userId, notification)
+   - getNotifications()
+   - markAsRead(notificationId)
+   - updateNotificationSettings(settings)
+3. Implement notification types:
+   - Target assignments
+   - Kill confirmations
+   - Proximity alerts
+   - Game status changes
+   - Admin announcements
+   - Safe zone alerts
+4. Design and implement Notifications screen with SwiftUI:
+   - List of notifications
+   - Read/unread status
+   - Notification filtering
+   - Clear all option
+5. Add in-app notification banners using custom SwiftUI views
+6. Implement notification preferences using Settings bundle
+7. Create notification history storage using Core Data
+
+# Test Strategy:
+1. Test APNs integration on iOS
+2. Verify notification delivery for different event types
+3. Test notification actions and deep linking
+4. Verify read/unread status management
+5. Test notification preferences
+6. Verify notification history storage and retrieval
+7. Test notification performance with high volume
+8. Use XCUITest for UI testing of notification screens

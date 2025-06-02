@@ -1,0 +1,34 @@
+# Task ID: 11
+# Title: Implement Target Assignment and Tracking
+# Status: pending
+# Dependencies: 8, 10
+# Priority: high
+# Description: Create the system for assigning targets to players and displaying target information using SwiftUI.
+# Details:
+1. Create targeting service with methods:
+   - getCurrentTarget(gameId)
+   - getTargetLocation(gameId, targetId)
+   - getTargetHistory(gameId)
+2. Implement target assignment algorithm:
+   - Random assignment
+   - Circular assignment
+   - Custom rules-based assignment
+3. Design and implement Target Details screen with SwiftUI:
+   - Target profile information
+   - Approximate location
+   - Last seen timestamp
+   - Kill report button
+4. Add target tracking on map using MapKit annotations
+5. Implement proximity alerts when near target using CLProximityBeacon
+6. Create target reassignment logic after eliminations
+7. Add "last will" message setting for when eliminated
+
+# Test Strategy:
+1. Unit test targeting service methods using XCTest
+2. Test target assignment algorithms
+3. Verify target information display
+4. Test proximity alerts at different distances
+5. Verify target reassignment after eliminations
+6. Test "last will" message functionality
+7. Verify target tracking accuracy
+8. Use XCUITest for UI testing of target information screens

@@ -1,0 +1,34 @@
+# Task ID: 21
+# Title: Implement Game History and Timeline
+# Status: pending
+# Dependencies: 8, 12, 20
+# Priority: low
+# Description: Create the game history and timeline features for viewing past games and events using SwiftUI and Core Data.
+# Details:
+1. Create game history service with methods:
+   - getGameHistory(userId)
+   - getGameTimeline(gameId)
+   - getGameResults(gameId)
+2. Design and implement Game History screen with SwiftUI:
+   - List of past games
+   - Performance summary
+   - Filter and sort options
+3. Create Game Timeline screen with SwiftUI:
+   - Chronological event list
+   - Kill feed
+   - Status changes
+   - Interactive timeline navigation
+4. Implement game replay visualization using MapKit
+5. Add event filtering by type
+6. Create detailed game results view
+7. Implement share functionality for game results using UIActivityViewController
+
+# Test Strategy:
+1. Unit test game history service methods using XCTest
+2. Verify game history retrieval and display
+3. Test timeline navigation and interaction
+4. Verify event filtering
+5. Test game replay visualization
+6. Verify game results accuracy
+7. Test share functionality
+8. Use XCUITest for UI testing of game history screens

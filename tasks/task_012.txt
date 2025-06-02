@@ -1,0 +1,36 @@
+# Task ID: 12
+# Title: Implement Kill Reporting System
+# Status: pending
+# Dependencies: 11
+# Priority: high
+# Description: Create the kill reporting system with multiple verification methods (GPS, NFC, Photo, Manual) using iOS frameworks.
+# Details:
+1. Create kill reporting service with methods:
+   - reportKill(gameId, targetId, method, evidence)
+   - verifyKill(killId, verified)
+   - disputeKill(killId, reason)
+   - getKillHistory(gameId)
+2. Implement verification methods:
+   - GPS proximity verification using CoreLocation
+   - NFC tag scanning using CoreNFC
+   - Photo evidence with AI verification using Vision framework
+   - Manual admin verification
+3. Design and implement Kill Report screen with SwiftUI:
+   - Target information
+   - Verification method selection
+   - Evidence collection (photo using UIImagePickerController, location)
+   - Submission confirmation
+4. Create kill verification flow for victims
+5. Implement dispute system for contested kills
+6. Add admin review interface for disputed kills
+7. Create kill feed with recent eliminations
+
+# Test Strategy:
+1. Unit test kill reporting service methods using XCTest
+2. Test each verification method
+3. Verify kill report submission flow
+4. Test dispute and resolution process
+5. Verify admin review functionality
+6. Test kill feed updates
+7. Verify notification delivery for kill events
+8. Use XCUITest for UI testing of kill reporting flow

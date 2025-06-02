@@ -1,0 +1,34 @@
+# Task ID: 15
+# Title: Implement WebSocket Connection for Real-time Updates
+# Status: pending
+# Dependencies: 9, 10, 11
+# Priority: high
+# Description: Create the WebSocket connection system for real-time game updates and player tracking using URLSessionWebSocketTask.
+# Details:
+1. Implement WebSocket service with methods using URLSessionWebSocketTask:
+   - connect(gameId)
+   - disconnect()
+   - subscribe(channel)
+   - unsubscribe(channel)
+   - send(message)
+2. Create reconnection logic with exponential backoff
+3. Implement event handlers for different message types:
+   - Location updates
+   - Game status changes
+   - Kill reports
+   - Target assignments
+   - Safe zone updates
+4. Add message queue for offline operation
+5. Implement connection status indicators
+6. Create WebSocket state management using Combine
+7. Add authentication for secure WebSocket connections
+
+# Test Strategy:
+1. Test WebSocket connection establishment
+2. Verify reconnection logic
+3. Test message handling for different event types
+4. Verify offline queue functionality
+5. Test connection status indicators
+6. Measure WebSocket performance and latency
+7. Test authentication and security
+8. Use XCTest for testing WebSocket functionality

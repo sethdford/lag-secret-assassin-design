@@ -1,0 +1,40 @@
+# Task ID: 1
+# Title: Setup Cross-Platform Project Structure
+# Status: pending
+# Dependencies: None
+# Priority: high
+# Description: Initialize the iOS mobile app project using Swift and SwiftUI as specified in the technical requirements.
+# Details:
+1. Set up native iOS development using Swift and SwiftUI
+2. Initialize project using Xcode with appropriate iOS deployment targets
+3. Set up project directory structure following iOS best practices:
+   - /Models (data models and business logic)
+   - /Views (SwiftUI views and components)
+   - /ViewModels (view models for MVVM architecture)
+   - /Services (API calls, authentication, etc.)
+   - /Utils (helper functions and extensions)
+   - /Resources (assets, fonts, localization files)
+   - /Managers (system service managers)
+4. Configure dependencies using Swift Package Manager:
+   - Networking library (Alamofire or native URLSession wrapper)
+   - Local storage solution (CoreData, UserDefaults wrapper)
+   - Image handling (Kingfisher or similar)
+5. Set up design system integration with Figma:
+   - Create color and typography extensions
+   - Implement design tokens
+   - Set up component library structure
+6. Configure SwiftLint for code quality
+7. Implement modern iOS architecture patterns:
+   - MVVM for presentation layer
+   - Coordinator pattern for navigation
+   - Repository pattern for data access
+8. Set up basic CI/CD pipeline for iOS
+
+# Test Strategy:
+1. Verify project builds successfully on iOS simulator and devices
+2. Run basic smoke tests to ensure app launches
+3. Verify directory structure follows established iOS patterns
+4. Ensure all development scripts work as expected
+5. Verify SwiftUI previews are working correctly
+6. Test design system components match Figma specifications
+7. Validate Swift Package Manager dependencies resolve correctly

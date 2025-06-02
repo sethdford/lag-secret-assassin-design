@@ -1,0 +1,31 @@
+# Task ID: 7
+# Title: Implement Game Creation Functionality
+# Status: pending
+# Dependencies: 6
+# Priority: medium
+# Description: Create functionality for game admins to create new games with custom rules and boundaries using SwiftUI forms.
+# Details:
+1. Create game creation service with methods:
+   - createGame(gameData)
+   - updateGame(gameId, gameData)
+   - deleteGame(gameId)
+2. Design and implement Game Creation screen with multi-step form using TabView or NavigationStack:
+   - Step 1: Basic info (name, description, start time)
+   - Step 2: Game rules and settings
+   - Step 3: Location and boundaries
+   - Step 4: Entry fee (if applicable)
+   - Step 5: Review and create
+3. Implement MapKit integration for game boundaries selection
+4. Add form validation for all game creation fields using Combine
+5. Create game rules configuration options using SwiftUI Pickers
+6. Implement preview of game settings
+7. Add confirmation dialog before game creation using confirmationDialog modifier
+
+# Test Strategy:
+1. Unit test game creation service methods using XCTest
+2. Test form validation for all game creation fields
+3. Verify MapKit boundary selection functionality
+4. Test multi-step form navigation
+5. Verify game creation with various configurations
+6. Test error handling for failed game creation
+7. Use XCUITest for UI testing of game creation flow

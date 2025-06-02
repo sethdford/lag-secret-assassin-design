@@ -1,0 +1,35 @@
+# Task ID: 8
+# Title: Implement Game Joining and Management
+# Status: pending
+# Dependencies: 6, 7
+# Priority: medium
+# Description: Create functionality for players to join games and for admins to manage participants using SwiftUI.
+# Details:
+1. Create game participation service with methods:
+   - joinGame(gameId)
+   - leaveGame(gameId)
+   - getParticipants(gameId)
+   - removeParticipant(gameId, userId) (admin only)
+2. Implement Join Game flow with:
+   - Confirmation dialog using confirmationDialog modifier
+   - Entry fee payment (if applicable)
+   - Terms acceptance using Toggle
+3. Create Game Management screen for admins with:
+   - Participant list using List view
+   - Remove participant functionality with swipe actions
+   - Game status controls (start, pause, end)
+   - Game settings modification
+4. Add participant list component with status indicators
+5. Implement admin verification for privileged actions
+6. Create game status management functionality
+7. Add notifications for game status changes using UNUserNotificationCenter
+
+# Test Strategy:
+1. Unit test game participation service methods using XCTest
+2. Test join game flow with various scenarios
+3. Verify admin management functionality
+4. Test participant removal
+5. Verify game status controls
+6. Test notifications for game events
+7. Verify permission checks for admin actions
+8. Use XCUITest for UI testing of game joining and management

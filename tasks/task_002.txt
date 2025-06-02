@@ -1,0 +1,228 @@
+# Task ID: 2
+# Title: Implement Design System and UI Components
+# Status: done
+# Dependencies: 1
+# Priority: high
+# Description: Create the SwiftUI-based design system with the specified dark tactical aesthetic, color scheme, and component library that integrates with Figma.
+# Details:
+1. Set up a theme provider using SwiftUI's environment and preference keys
+2. Implement the color palette as specified in PRD:
+   - Primary: Deep red (#CC0000)
+   - Secondary: Electric blue (#0080FF)
+   - Accent: Neon green (#00FF00)
+   - Background: Dark navy/black (#0A0A0F)
+   - Text: White/light gray
+3. Configure typography using SF Pro or other iOS-compatible fonts
+4. Create base UI components in SwiftUI:
+   - Button (primary, secondary, danger, ghost variants)
+   - Card components (game, player, stat cards)
+   - Form elements (inputs, pickers, toggles)
+   - Navigation components (tab bar, navigation bar)
+   - Notification components (alerts, badges, banners)
+   - List components
+5. Implement responsive layouts for different iOS devices
+6. Add tactical/military inspired iconography using SF Symbols or custom assets
+7. Create animation utilities for transitions and micro-interactions
+8. Ensure support for iOS accessibility features, dark mode, and dynamic type
+9. Set up Figma integration for design token synchronization
+
+# Test Strategy:
+1. Create a SwiftUI preview catalog of all UI components
+2. Test components across different iOS device sizes
+3. Verify accessibility features (VoiceOver, Dynamic Type, contrast)
+4. Conduct visual regression testing
+5. Verify haptic feedback implementation
+6. Test dark mode and light mode transitions
+7. Validate design token synchronization with Figma
+
+# Subtasks:
+## 1. Set up theme provider with SwiftUI environment [done]
+### Dependencies: None
+### Description: Configure the theme provider infrastructure using SwiftUI's environment and preference keys to enable consistent theming across the application
+### Details:
+Create a ThemeManager that uses SwiftUI's EnvironmentObject to provide theme values to all views. Set up the basic theme structure with objects for colors, typography, spacing, and other design tokens that will be filled in subsequent tasks. Implement preference keys for theme customization.
+<info added on 2025-05-25T13:55:56.744Z>
+Comprehensive UI Kit created in Figma based on inspiration layers with the following components:
+
+- 🎨 Color Palette: Primary red, background dark, accent blue, text colors, status colors
+- 📝 Typography: H1, H2, Body, Caption with DM Sans font family
+- 🔘 Button Components: Primary elimination button, secondary scan button, various states
+- 🃏 Card Components: Target info cards with proper styling and layout
+- 📍 Location Components: Player pins, target markers, location indicators
+- 📐 Spacing & Grid: XS (4px) spacing examples and grid system
+- 🧩 Iconography: Target, map, and other game-specific icons
+- ⌨️ Forms & Inputs: Text inputs with proper styling and placeholder text
+- 🧭 Navigation: Tab bar with map, profile, and other navigation elements
+- 💬 Modals & Dialogs: Elimination confirmation modal with proper styling
+- 📋 Lists & Items: Player list items with status indicators and info
+- 📊 Data Display & Status: Game status badges, player counts, and data visualization
+
+All components follow the dark tactical aesthetic with red accents as defined in the design system, ready for iOS Swift implementation.
+</info added on 2025-05-25T13:55:56.744Z>
+<info added on 2025-05-25T14:03:16.048Z>
+**Typography System Implementation Details:**
+
+Typography hierarchy extracted from inspiration layers:
+- **H1 Titles**: DM Sans Bold 22px
+- **H2 Button Text**: DM Sans Regular 18px
+- **Body Large**: DM Sans Medium 16px
+- **Body Medium**: DM Sans Medium 14px
+- **Body Small**: DM Sans Regular 12px
+- **Caption Medium**: DM Sans Medium 12px
+- **Map Labels Large**: Montserrat Medium 8px
+- **Map Labels Small**: Montserrat Medium 5px
+- **System Text**: SF Pro Text Semibold 15px
+
+Font families identified:
+1. DM Sans (Primary UI font) - Bold, Medium, Regular weights
+2. Montserrat (Map labels) - Medium weight
+3. SF Pro Text (System text) - Semibold weight
+
+Text color palette:
+- Text Primary Dark: #1E1E1E
+- Text Secondary Gray: #9D9D9D
+- Text Primary Light: #FFFFFF
+
+Implementation completed:
+- Typography section in Figma UI Kit updated with exact specifications
+- Text color swatches added to color palette
+- Documentation updated with font specifications, color usage guidelines, and Swift code examples
+- Typography modifiers created for each identified style
+</info added on 2025-05-25T14:03:16.048Z>
+<info added on 2025-05-25T15:37:13.608Z>
+**API Analysis & Documentation Complete:**
+
+**10 Core API Categories Documented:**
+1. **Authentication** - Registration, login, JWT sessions
+2. **Player Management** - Profiles, targets, location tracking  
+3. **Game Management** - Creation, lifecycle, boundaries, timeline
+4. **Kill Management** - Elimination reporting, verification (GPS/NFC/Photo), history
+5. **Safe Zones** - 4 types (Public, Private, Timed, Relocatable) with rules
+6. **Notifications** - Real-time events, proximity alerts, admin messages
+7. **Location Services** - GPS tracking, proximity detection, boundaries
+8. **Payments** - Stripe integration, entry fees, transactions
+9. **Emergency Controls** - Game pause/resume, safety features
+10. **Statistics & Leaderboards** - Player stats, rankings, achievements
+
+**Complete UI Wireframe Prompt Created:**
+- **11 Major User Journeys** mapped to API capabilities
+- **50+ Screen Requirements** with detailed specifications
+- **Design System Integration** with exact colors, typography, components
+- **Technical Considerations** for iOS native development
+- **Safety & Privacy Guidelines** for location-based gameplay
+- **Success Metrics** for engagement, safety, and business goals
+
+**Key Deliverables Specified:**
+- Complete user flow diagrams
+- Detailed wireframes with annotations
+- Interactive prototypes
+- Component library documentation
+- Responsive design considerations
+- Accessibility guidelines
+- Animation specifications
+- Error state handling
+
+**File Created:** `docs/ui-wireframe-prompt.md` - Ready for LLM wireframe generation
+</info added on 2025-05-25T15:37:13.608Z>
+<info added on 2025-05-25T15:44:45.039Z>
+**ThemeManager Implementation Details:**
+
+Created a comprehensive ThemeManager using SwiftUI's EnvironmentObject pattern with the following components:
+
+- **Color System**: Implemented all colors from the UI Kit including primary red (#E63946), background dark (#1D3557), accent blue (#457B9D), text colors, and status indicators
+- **Typography System**: Created text style modifiers for all typography styles (H1, H2, Body variants, Caption) with proper font families (DM Sans, Montserrat, SF Pro)
+- **Spacing System**: Implemented a consistent spacing scale starting from XS (4px) with multipliers
+- **Component Theming**: Added theme support for all UI components identified in the design system
+- **Dark/Light Mode**: Added support for both modes with appropriate color shifts
+- **Preference Keys**: Implemented SwiftUI preference keys for theme customization
+- **Theme Switching**: Added ability to switch between themes (default tactical, alternative themes)
+- **Accessibility**: Ensured all colors meet contrast requirements with accessibility options
+- **Documentation**: Created comprehensive usage documentation with code examples
+
+All theme values are now accessible throughout the app via the environment, supporting the 21 user journey epics and 200+ user stories from the PRD.
+</info added on 2025-05-25T15:44:45.039Z>
+
+## 2. Implement color palette system [done]
+### Dependencies: 2.1
+### Description: Define and implement the color palette according to the PRD specifications using SwiftUI Color extensions
+### Details:
+Create a Colors.swift file that extends SwiftUI.Color with static properties for all theme colors. Implement the specified colors: Primary (#CC0000), Secondary (#0080FF), Accent (#00FF00), Background (#0A0A0F), and text colors. Include additional shades of each color (lighter/darker variants) for different states. Add support for dark mode with appropriate color adaptations. Add these colors to the theme object.
+
+## 3. Configure typography system [done]
+### Dependencies: 2.1
+### Description: Set up the typography system using SF Pro or other iOS-compatible fonts with appropriate scales and variants
+### Details:
+Create a Typography.swift file with SwiftUI text modifiers for different text styles. Define typography variants (largeTitle, title, headline, body, caption, etc.) that align with iOS standards but maintain the tactical aesthetic. Support Dynamic Type for accessibility. Add these typography definitions to the theme object.
+
+## 4. Create button component variants [done]
+### Dependencies: 2.2, 2.3
+### Description: Implement SwiftUI button components with primary, secondary, danger, and ghost variants
+### Details:
+Create a ButtonStyle protocol extension and concrete implementations for each variant. Implement styling for primary (deep red), secondary (electric blue), danger (warning color), and ghost (transparent with border) variants. Include states for pressed, disabled, and loading. Ensure buttons have proper padding, cornerRadius, and animations. Support accessibility traits.
+
+## 5. Develop card components [done]
+### Dependencies: 2.2, 2.3
+### Description: Create SwiftUI card components for displaying game, player, and stat information
+### Details:
+Implement a base Card view with appropriate styling (background, border, shadow). Create specialized variants: GameCard (for displaying game information), PlayerCard (for player profiles), and StatCard (for displaying statistics). Each card should have header, body, and footer sections with appropriate spacing. Use ViewModifiers for consistent styling.
+
+## 6. Build form elements [done]
+### Dependencies: 2.2, 2.3
+### Description: Create SwiftUI form components including text fields, pickers, and toggles
+### Details:
+Implement form elements with the tactical aesthetic: custom TextField, Picker, DatePicker, Toggle, and Slider components. Each component should have states for default, focus, error, and disabled. Include validation styling and error message display capabilities. Ensure compatibility with Form containers.
+
+## 7. Implement navigation components [done]
+### Dependencies: 2.2, 2.3, 2.4
+### Description: Create SwiftUI navigation components including tab bar and navigation bars
+### Details:
+Design and implement a custom TabView style for main navigation with active/inactive states. Create custom NavigationBar components with title, optional back button, and action buttons. Ensure navigation components follow iOS patterns while maintaining the tactical aesthetic. Use NavigationViewStyle and TabViewStyle for customization.
+
+## 8. Develop notification components [done]
+### Dependencies: 2.2, 2.3
+### Description: Create SwiftUI notification components including alerts, badges, and banners
+### Details:
+Implement custom Alert views for different notification types. Create Badge components for counters and status indicators. Design Banner components for temporary notifications with success, error, warning, and info variants. Include SwiftUI animations for appearance/disappearance. Support haptic feedback.
+
+## 9. Create list components [done]
+### Dependencies: 2.2, 2.3
+### Description: Implement SwiftUI list components for displaying collections of items
+### Details:
+Create custom List and ForEach styling with appropriate tactical aesthetics. Implement custom row styles for different use cases (settings list, player list, etc.). Include support for icons, avatars, actions, and dividers. Ensure proper spacing and alignment of list items. Support swipe actions and list selection.
+
+## 10. Implement tactical/military iconography [done]
+### Dependencies: 2.2
+### Description: Create or integrate a set of tactical/military inspired icons using SF Symbols or custom assets
+### Details:
+Leverage SF Symbols where possible and supplement with custom SVG icons for tactical/military aesthetic. Create an Icon view that can render different icons based on parameters. Customize SF Symbols with the tactical style using renderingMode and symbolVariant. Ensure icons can be colored and sized consistently. Support dynamic content size changes.
+
+## 11. Create animation utilities [done]
+### Dependencies: 2.1
+### Description: Develop SwiftUI animation utilities for transitions and micro-interactions
+### Details:
+Create a set of reusable animation utilities using SwiftUI's animation and transition APIs. Implement animations for: view transitions, component appearance/disappearance, gesture responses, and loading states. Define standard durations and easing functions in the theme. Create ViewModifiers or extension methods for common animation patterns.
+
+## 12. Implement responsive layout system [done]
+### Dependencies: 2.1
+### Description: Create a responsive layout system with SwiftUI layout tools and spacing utilities
+### Details:
+Implement a responsive layout system using SwiftUI's HStack, VStack, and GeometryReader. Create layout components like Container, Grid, and Spacer with appropriate modifiers for responsive behavior. Define spacing constants (margin, padding) in the theme. Create ViewModifiers for responsive spacing and positioning. Test layouts across different iOS device sizes.
+
+## 13. Implement iOS accessibility features [done]
+### Dependencies: 2.1, 2.2, 2.3, 2.4
+### Description: Ensure the design system fully supports iOS accessibility features
+### Details:
+Implement comprehensive accessibility support including VoiceOver labels and hints, Dynamic Type scaling, sufficient contrast ratios, and proper focus management. Create accessibility modifiers that can be applied consistently across components. Test with Accessibility Inspector. Document accessibility best practices for component usage.
+
+## 14. Set up Figma integration [done]
+### Dependencies: 2.1, 2.2, 2.3
+### Description: Establish a workflow for synchronizing design tokens between Figma and the SwiftUI design system
+### Details:
+Research and implement a solution for exporting design tokens from Figma to Swift code. Options include Figma plugins like 'Design Tokens' or 'Figma Tokens', or custom scripts. Create a process for updating colors, typography, spacing, and other design values when they change in Figma. Document the synchronization workflow for the team.
+
+## 15. Implement dark mode support [done]
+### Dependencies: 2.2, 2.3
+### Description: Ensure all components properly adapt to iOS dark mode
+### Details:
+Implement proper dark mode variants for all colors and assets. Use Color(UIColor.systemBackground) pattern where appropriate. Test all components in both light and dark mode. Create utilities for forcing specific appearance if needed for the tactical aesthetic. Support automatic transitions between modes.
+

@@ -1,0 +1,33 @@
+# Task ID: 4
+# Title: Implement User Profile Management
+# Status: pending
+# Dependencies: 3
+# Priority: medium
+# Description: Create user profile functionality allowing users to view and update their profile information and display name in the iOS app.
+# Details:
+1. Create user profile service with methods:
+   - getProfile()
+   - updateProfile(profileData)
+   - updateDisplayName(displayName)
+   - updateAvatar(imageFile)
+2. Design and implement Profile screen with SwiftUI:
+   - Profile photo/avatar
+   - Display name
+   - Email (non-editable)
+   - Edit profile button
+   - Game statistics summary
+   - Settings section
+3. Create Edit Profile modal/sheet using SwiftUI sheets
+4. Implement PHPickerViewController for profile photos
+5. Add form validation for profile updates using Combine
+6. Implement optimistic UI updates with proper error handling
+7. Create profile state management using Combine publishers
+
+# Test Strategy:
+1. Unit test profile service methods with XCTest
+2. Test form validation for profile updates
+3. Verify image upload and processing using PHPickerViewController
+4. Test profile data persistence using UserDefaults and/or Core Data
+5. Verify UI updates correctly after profile changes
+6. Test error handling for failed profile updates
+7. Use XCUITest for UI testing of profile management

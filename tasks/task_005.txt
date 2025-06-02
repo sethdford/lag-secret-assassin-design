@@ -1,0 +1,29 @@
+# Task ID: 5
+# Title: Implement Main App Navigation
+# Status: pending
+# Dependencies: 2, 3
+# Priority: high
+# Description: Create the tab-based navigation structure with Home/Dashboard, Map, Profile, Games, and Leaderboard tabs using SwiftUI TabView.
+# Details:
+1. Set up SwiftUI TabView with custom tab bar
+2. Create tab screens with placeholder content:
+   - Home/Dashboard - Game status, quick actions, notifications
+   - Map - Game map placeholder
+   - Profile - Link to profile screen
+   - Games - Browse/join/create games placeholder
+   - Leaderboard - Rankings placeholder
+3. Implement tab icons and labels with SF Symbols and tactical aesthetic
+4. Add navigation service for programmatic navigation using NavigationStack
+5. Implement navigation guards for authenticated routes using ViewModifiers
+6. Add transition animations between screens using SwiftUI transitions
+7. Configure deep linking support using Universal Links
+8. Implement navigation state persistence using SceneStorage
+
+# Test Strategy:
+1. Test navigation between all tabs using XCUITest
+2. Verify correct tab highlighting
+3. Test navigation guards for unauthenticated users
+4. Verify deep linking functionality with Universal Links
+5. Test navigation state persistence after app restart
+6. Verify animations and transitions
+7. Test accessibility of navigation elements

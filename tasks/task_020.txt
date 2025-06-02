@@ -1,0 +1,36 @@
+# Task ID: 20
+# Title: Implement Statistics and Leaderboards
+# Status: pending
+# Dependencies: 8, 12
+# Priority: low
+# Description: Create the comprehensive statistics and leaderboard system for player performance tracking using SwiftUI and Core Data.
+# Details:
+1. Create statistics service with methods:
+   - getPlayerStats(userId)
+   - getGameStats(gameId)
+   - getLeaderboard(gameId, category)
+   - getHistoricalStats(userId)
+2. Design and implement Statistics screen with SwiftUI:
+   - Personal performance metrics
+   - Game history
+   - Achievement badges
+   - Performance graphs using Swift Charts
+3. Create Leaderboard screen with SwiftUI:
+   - Global rankings
+   - Game-specific rankings
+   - Category filters (kills, survival time, etc.)
+   - Friend comparisons
+4. Implement statistics calculation algorithms
+5. Add data visualization components using Swift Charts
+6. Create achievement system
+7. Implement stat comparison functionality
+
+# Test Strategy:
+1. Unit test statistics service methods using XCTest
+2. Verify statistics calculation accuracy
+3. Test leaderboard sorting and filtering
+4. Verify data visualization components
+5. Test achievement triggers
+6. Verify stat comparison functionality
+7. Test performance with large datasets
+8. Use XCUITest for UI testing of statistics and leaderboard screens

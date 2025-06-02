@@ -1,0 +1,37 @@
+# Task ID: 13
+# Title: Implement Safe Zones System
+# Status: pending
+# Dependencies: 9, 10
+# Priority: medium
+# Description: Create the safe zone system with different types (PUBLIC, PRIVATE, TIMED, RELOCATABLE) using CoreLocation and MapKit.
+# Details:
+1. Create safe zone service with methods:
+   - getSafeZones(gameId)
+   - createSafeZone(gameId, zoneData)
+   - updateSafeZone(zoneId, zoneData)
+   - deleteSafeZone(zoneId)
+   - checkInSafeZone(location)
+2. Implement safe zone types:
+   - PUBLIC: Available to all players
+   - PRIVATE: Available to specific players
+   - TIMED: Active during specific time periods
+   - RELOCATABLE: Can be moved by admins
+3. Design and implement Safe Zones screen with SwiftUI:
+   - List of active safe zones
+   - Map visualization using MapKit
+   - Safe zone creation (for admins)
+   - Safe zone status indicators
+4. Add geofencing for safe zone entry/exit detection using CLCircularRegion
+5. Implement notifications for safe zone events using UNUserNotificationCenter
+6. Create safe zone visualization on map using MKCircle overlays
+7. Add private safe zone management for eligible players
+
+# Test Strategy:
+1. Unit test safe zone service methods using XCTest
+2. Test geofencing for different safe zone types
+3. Verify safe zone creation and management
+4. Test notifications for safe zone entry/exit
+5. Verify visualization on map
+6. Test time-based safe zone activation/deactivation
+7. Verify private safe zone access controls
+8. Use XCUITest for UI testing of safe zone management

@@ -1,0 +1,36 @@
+# Task ID: 6
+# Title: Implement Game Discovery and Browsing
+# Status: pending
+# Dependencies: 5
+# Priority: medium
+# Description: Create functionality for players to browse available games and view game details using SwiftUI lists and detail views.
+# Details:
+1. Create game service with methods:
+   - getGames(filters)
+   - getGameDetails(gameId)
+2. Design and implement Games screen with SwiftUI:
+   - List of available games using List view
+   - Search and filter functionality using SearchBar
+   - Game status indicators (CREATED, ACTIVE, COMPLETED, PENDING)
+   - Join game button
+3. Create Game Details screen showing:
+   - Game name and description
+   - Admin information
+   - Player count
+   - Game rules and settings
+   - Start time and duration
+   - Entry fee (if applicable)
+   - Join button
+4. Implement pull-to-refresh using RefreshControl and pagination
+5. Add game card component with visual status indicators
+6. Create game filtering by status, location, and other criteria
+7. Use Combine for asynchronous data loading
+
+# Test Strategy:
+1. Unit test game service methods using XCTest
+2. Test game list pagination and filtering
+3. Verify game details display correctly
+4. Test pull-to-refresh functionality
+5. Verify game status indicators
+6. Test search functionality with various queries
+7. Use XCUITest for UI testing of game browsing
