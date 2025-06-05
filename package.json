@@ -9,7 +9,7 @@
   },
   "scripts": {
     "example": "cd example && npm start",
-    "example:install": "cd example && npm install",
+    "example:install": "cd example && npm install --legacy-peer-deps",
     "example:ios": "cd example && npm run ios",
     "example:android": "cd example && npm run android",
     "example:web": "cd example && npm run web"
