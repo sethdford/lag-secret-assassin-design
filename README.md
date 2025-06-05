@@ -56,7 +56,7 @@ This design system includes:
    ```
 
 3. **Open in browser:**
-   Go to `http://localhost:19006` or scan the QR code with Expo Go
+   Go to `http://localhost:8081` or scan the QR code with Expo Go
 
 ### Available Commands
 

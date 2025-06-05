@@ -22,7 +22,7 @@ This is a React Native Storybook implementation that showcases the Assassin Game
    ```
 
 3. **Open on device/simulator:**
-   - **Web**: Press `w` or go to `http://localhost:19006`
+   - **Web**: Press `w` or go to `http://localhost:8081`
    - **iOS**: Press `i` or run `npm run ios`
    - **Android**: Press `a` or run `npm run android`
 
