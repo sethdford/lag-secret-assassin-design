@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Design System Shadows - Auto-generated from Figma
-/// Last updated: 2025-06-07T18:17:15.690Z
+/// Last updated: 2025-06-07T18:29:45.717Z
 extension View {
     
     // MARK: - Tactical Shadow Effects

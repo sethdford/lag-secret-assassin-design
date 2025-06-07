@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "figma:live-sync": "node scripts/figma-live-sync.js",
+    "figma:live-watch": "node scripts/figma-live-sync.js --watch",
     "figma:export": "node scripts/figma-export.js",
     "figma:export-tokens": "node scripts/figma-export.js --tokens-only",
     "figma:export-components": "node scripts/figma-export.js --components-only",
@@ -46,6 +48,8 @@
     "preview:showcase": "echo 'Open src/components/previews/SimpleDesignShowcase.swift in Xcode'",
     "storyboard:clean": "rm -rf storyboard-output && rm -rf xcode-templates",
     
+    "components:live-generate": "node scripts/figma-live-component-generator.js --selection",
+    "components:live-all": "node scripts/figma-live-component-generator.js --all",
     "components:analyze": "node scripts/figma-component-analyzer.js",
     "components:generate": "node scripts/figma-component-analyzer.js --generate",
     "tokens:sync": "node scripts/design-token-sync.js",
@@ -56,6 +60,7 @@
     "test:performance": "xcodebuild test -scheme PerformanceTests -destination 'platform=iOS Simulator,name=iPhone 14'",
     "test:visual": "xcodebuild test -scheme VisualRegressionTests -destination 'platform=iOS Simulator,name=iPhone 14'",
     "test:all": "npm run test:ui && npm run test:accessibility && npm run test:performance && npm run test:visual",
+    "dev:live": "npm run figma:live-watch",
     "dev:watch": "concurrently \"npm run tokens:watch\" \"npm run components:analyze\" \"npm run figma:watch\"",
     "dev:setup": "npm run tokens:generate && npm run components:generate && npm run storyboard:sample",
     "build:components": "npm run components:analyze && npm run tokens:sync && npm run storyboard:generate",

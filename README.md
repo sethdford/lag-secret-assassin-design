@@ -1,13 +1,34 @@
 # Assassin Game Design System
 
-An advanced automated Swift design system for the Assassin Game mobile application. This design system provides comprehensive Figma-to-code automation, real-time design token sync, and a complete set of components and patterns specifically crafted for the tactical, cinematic aesthetic described in the Product Requirements Document.
+An advanced automated Swift design system with **live Figma channel integration**. This design system provides real-time bidirectional Figma-to-code automation, instant design token sync, and intelligent SwiftUI component generation from live Figma selections. Perfect for ride-sharing apps, tactical gaming interfaces, and modern mobile applications.
 
-## 🚀 Enhanced Figma-to-Code Workflow
+## 🚀 **Live Figma Channel Integration** ⚡
 
-This design system now includes powerful automation tools to streamline the transition from Figma designs to production-ready SwiftUI code:
+**Revolutionary real-time design-to-code workflow** using live Figma channels:
 
-- **🎨 Automated Figma Integration**: Sync design tokens and components directly from Figma
-- **🤖 AI-Powered Component Generation**: Generate SwiftUI components from Figma designs
+### 🎯 **Live Channel vs REST API**
+| Feature | REST API | **Live Channel** |
+|---------|----------|------------------|
+| Updates | Manual polling | ✅ **Real-time** |
+| Direction | Read-only | ✅ **Bidirectional** |
+| Performance | Rate-limited | ✅ **Event-driven** |
+| Selection Sync | Manual | ✅ **Automatic** |
+
+### 🔧 **Quick Start**
+```bash
+# 🚀 Start live development mode
+npm run dev:live
+
+# 🧩 Generate SwiftUI from current Figma selection
+npm run components:live-generate
+
+# 🎨 Sync design tokens in real-time
+npm run figma:live-sync
+```
+
+### 🚀 **Enhanced Automation Features**
+- **🎨 Live Figma Integration**: Real-time sync with Figma channel `kqzej2sr`
+- **🤖 AI-Powered Component Generation**: Generate SwiftUI components from live Figma selections
 - **📸 Visual Regression Testing**: Ensure designs match implementation pixel-perfectly
 - **📚 Auto-Generated Documentation**: Comprehensive docs with interactive examples
 - **🔄 CI/CD Pipeline**: Automated testing, building, and deployment

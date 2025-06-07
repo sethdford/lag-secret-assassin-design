@@ -1,5 +1,7 @@
 {
   "figma": {
+    "channel": "kqzej2sr",
+    "useLiveConnection": true,
     "fileKey": "YOUR_FIGMA_FILE_KEY",
     "accessToken": "YOUR_FIGMA_ACCESS_TOKEN",
     "teamId": "YOUR_TEAM_ID"
@@ -35,8 +37,9 @@
     }
   },
   "sync": {
-    "autoSync": false,
-    "syncInterval": "daily",
+    "autoSync": true,
+    "syncInterval": "30s",
+    "liveSync": true,
     "createPullRequest": true,
     "notifySlack": true,
     "slackChannel": "#design-system"
