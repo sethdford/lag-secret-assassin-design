@@ -1,131 +1,317 @@
-# LAG Secret Assassin - Design System
+# Assassin Game Design System
 
-A comprehensive design system for the LAG Secret Assassin mobile game, including design tokens, documentation, and interactive React Native Storybook components.
+An advanced automated Swift design system for the Assassin Game mobile application. This design system provides comprehensive Figma-to-code automation, real-time design token sync, and a complete set of components and patterns specifically crafted for the tactical, cinematic aesthetic described in the Product Requirements Document.
 
-## 📁 Repository Structure
+## 🚀 Enhanced Figma-to-Code Workflow
 
-```
-lag-secret-assassin-design/
-├── docs/                      # Design system documentation
-│   ├── design-system.md       # Complete design system guide
-│   ├── storybook-guide.md     # Storybook implementation guide
-│   ├── figma-colors-extracted.swift
-│   ├── ui-kit-implementation.md
-│   └── variables/             # Figma design tokens (JSON)
-├── example/                   # Interactive Storybook demo
-│   ├── .rnstorybook/         # React Native Storybook
-│   ├── App.js                # Demo app entry point
-│   └── README.md             # Example app documentation
-└── .taskmaster/              # Project management
-    ├── docs/                 # Project requirements
-    └── tasks/                # Development tasks
-```
+This design system now includes powerful automation tools to streamline the transition from Figma designs to production-ready SwiftUI code:
 
-## 🎨 Design System
+- **🎨 Automated Figma Integration**: Sync design tokens and components directly from Figma
+- **🤖 AI-Powered Component Generation**: Generate SwiftUI components from Figma designs
+- **📸 Visual Regression Testing**: Ensure designs match implementation pixel-perfectly
+- **📚 Auto-Generated Documentation**: Comprehensive docs with interactive examples
+- **🔄 CI/CD Pipeline**: Automated testing, building, and deployment
+- **♿ Accessibility First**: Built-in accessibility features and testing
 
-This design system includes:
+## 🎯 Overview
 
-### **Design Tokens**
-- **Colors**: 50+ colors including primary/secondary scales, status colors, dark theme
-- **Typography**: Comprehensive font sizes and weights
-- **Spacing**: 4px-based consistent spacing system
+The Assassin Game Design System delivers:
 
-### **Components**
-- **Buttons**: 5 variants (Primary, Secondary, Danger, Success, Ghost)
-- **Cards**: Basic and game-specific variants
-- **Game Elements**: Player status, elimination reports, game management
-
-### **Game-Specific Features**
-- **Player Status**: Visual indicators for alive/dead/spectator states
-- **Elimination Tracking**: Styled components for game events
-- **Safe Zones**: Success-styled components for safe areas
-- **Emergency Actions**: High-priority danger-styled elements
+- **Tactical Aesthetic**: Dark theme with neon accents and military-inspired styling
+- **Cinematic Experience**: Dramatic animations and spy-thriller visual language
+- **Native Performance**: Built specifically for iOS with SwiftUI
+- **Component Library**: Reusable components for rapid development
+- **Design Tokens**: Consistent colors, typography, and spacing
 
 ## 🚀 Quick Start
 
-### View the Interactive Storybook
+### Prerequisites
 
-1. **Install dependencies:**
-   ```bash
-   npm run example:install
-   ```
+- Xcode 15.0+
+- iOS 16.0+
+- Swift 5.9+
 
-2. **Start the Storybook:**
-   ```bash
-   npm run example
-   ```
+### Installation
 
-3. **Open in browser:**
-   Go to `http://localhost:8081` or scan the QR code with Expo Go
+#### Swift Package Manager
 
-### Available Commands
+Add this package to your Xcode project:
 
-- `npm run example` - Start the Storybook demo
-- `npm run example:install` - Install example dependencies
-- `npm run example:ios` - Open in iOS simulator
-- `npm run example:android` - Open in Android emulator
-- `npm run example:web` - Open in web browser
+```
+https://github.com/your-org/assassin-game-design-system
+```
 
-## 📱 Interactive Demo
+Or add to your `Package.swift`:
 
-The example Storybook allows you to:
-- **Browse Components**: See all design system components
-- **Test Variants**: Try different states and configurations
-- **View Design Tokens**: Explore colors, typography, and spacing
-- **Game Context**: See components in assassin game scenarios
+```swift
+dependencies: [
+    .package(url: "https://github.com/your-org/assassin-game-design-system", from: "1.0.0")
+]
+```
 
-## 🎮 Game-Specific Design
+#### Local Development
 
-### Color Semantics
-- **Primary Green (#0CC25F)**: Safe zones, positive actions
-- **Danger Red (#F75555)**: Eliminations, dangerous areas
-- **Warning Yellow (#FACC15)**: Cautions, pending states
-- **Success Green (#12D18E)**: Successful actions, confirmations
+1. Clone the repository:
+```bash
+git clone https://github.com/your-org/assassin-game-design-system.git
+cd assassin-game-design-system
+```
 
-### Component Variants
-- **Player Cards**: Dynamically styled based on player status
-- **Action Buttons**: Context-aware styling for game actions
-- **Status Indicators**: Visual feedback for game states
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development workflow:
+```bash
+npm run dev
+```
+
+## 🎨 Design Tokens
+
+### Colors
+
+The design system uses a tactical color palette:
+
+- **Assassin Red** (`#C91C1C`) - Primary actions, eliminations, danger
+- **Tactical Blue** (`#3366CC`) - Secondary actions, information
+- **Electric Green** (`#00FF41`) - Safe zones, success states
+- **Deep Navy** (`#0D0D1A`) - Primary background
+
+### Typography
+
+- **Primary**: SF Pro Display (headings, UI elements)
+- **Secondary**: SF Pro Text (body text, descriptions)
+- **Monospace**: SF Mono (codes, technical data)
+
+### Spacing
+
+Consistent spacing scale: `4px`, `8px`, `16px`, `24px`, `32px`, `48px`, `64px`
+
+## 🧩 Components
+
+### TacticalButton
+
+Cinematic button component with multiple styles and haptic feedback:
+
+```swift
+import AssassinGameDesignSystem
+
+TacticalButton(
+    title: "ELIMINATE TARGET",
+    style: .primary,
+    size: .large,
+    icon: "target"
+) {
+    // Handle elimination action
+}
+```
+
+**Styles:**
+- `.primary` - Assassin Red for critical actions
+- `.secondary` - Tactical Blue for secondary actions
+- `.success` - Electric Green for positive actions
+- `.danger` - Red with warning styling
+- `.ghost` - Transparent with border
+
+### MissionBriefingCard
+
+Classified document-style card for target assignments:
+
+```swift
+let mission = MissionBriefingCard.MissionData(
+    targetName: "Alex Chen",
+    codename: "SHADOW_WALKER",
+    lastKnownLocation: "Engineering Building",
+    missionType: .elimination,
+    priority: .high,
+    timeRemaining: 7200,
+    briefingText: "Target is highly skilled...",
+    restrictions: ["No elimination during class hours"]
+)
+
+MissionBriefingCard(mission: mission) {
+    // Handle mission acceptance
+}
+```
+
+## 📱 Usage in Your App
+
+### Basic Setup
+
+```swift
+import SwiftUI
+import AssassinGameDesignSystem
+
+struct ContentView: View {
+    var body: some View {
+        VStack {
+            // Your app content using design system components
+        }
+        .background(DesignTokens.Colors.backgroundPrimary)
+    }
+}
+```
+
+### Using Design Tokens
+
+```swift
+Text("Mission Status")
+    .font(.system(size: DesignTokens.Typography.lg, weight: .bold))
+    .foregroundColor(DesignTokens.Colors.textPrimary)
+    .padding(DesignTokens.Spacing.md)
+```
+
+## 🔧 Figma-to-Code Automation
+
+### Setup Figma Integration
+
+1. **Configure Figma Access**:
+```bash
+# Set environment variables
+export FIGMA_TOKEN="your_figma_access_token"
+export FIGMA_FILE_KEY="your_figma_file_key"
+
+# Or update figma.config.json
+```
+
+2. **Export Design Tokens**:
+```bash
+# Export all design tokens from Figma
+npm run figma:export-tokens
+
+# Export specific components
+npm run figma:export-components
+
+# Export assets (icons, images)
+npm run figma:export-assets
+```
+
+3. **Generate Components**:
+```bash
+# Generate SwiftUI components from Figma designs
+npm run generate:components
+
+# Generate comprehensive documentation
+npm run generate:docs
+```
+
+### Automated Workflow
+
+The design system includes several automation scripts:
+
+- **`scripts/figma-export.js`**: Extracts design tokens, components, and assets from Figma
+- **`scripts/component-generator.js`**: AI-powered SwiftUI component generation
+- **`scripts/docs-generator.js`**: Auto-generates comprehensive documentation
+- **`tests/VisualRegressionTests.swift`**: Ensures visual consistency between Figma and code
+
+### Visual Regression Testing
+
+Ensure your implementations match Figma designs:
+
+```bash
+# Run visual regression tests
+npm run visual:test
+
+# Record new snapshots (when designs change)
+npm run visual:record
+```
+
+### Development Workflow
+
+1. **Design in Figma**: Create or update components in your Figma design system
+2. **Sync Changes**: Run `npm run figma:export` to pull latest changes
+3. **Generate Code**: Use `npm run generate:components` to create SwiftUI components
+4. **Test Visually**: Run `npm run visual:test` to ensure pixel-perfect implementation
+5. **Document**: Auto-generate docs with `npm run generate:docs`
+
+### CI/CD Integration
+
+The included GitHub Actions workflow automatically:
+
+- Syncs design changes from Figma daily
+- Runs visual regression tests on every PR
+- Generates and deploys documentation
+- Creates releases with proper versioning
+
+## 🛠 Development
+
+### Project Structure
+
+```
+src/
+├── components/
+│   ├── DesignTokens.swift
+│   ├── buttons/
+│   │   └── TacticalButton.swift
+│   ├── cards/
+│   │   └── MissionBriefingCard.swift
+│   ├── forms/
+│   ├── navigation/
+│   ├── maps/
+│   └── notifications/
+docs/
+└── variables/
+```
+
+### Building Components
+
+1. Create new components in the appropriate `src/components/` subdirectory
+2. Follow the established naming conventions and structure
+3. Include comprehensive previews and tests
+4. Use design tokens for consistency
+
+### Development Commands
+
+```bash
+# Start development workflow with real-time sync
+npm run dev
+
+# Build all components and documentation
+npm run build:all
+
+# Generate Xcode project with storyboards
+npm run xcode:generate
+```
+
+## 🎮 Game-Specific Features
+
+This design system is specifically tailored for the Assassin Game with:
+
+- **Mission-focused UI**: Components designed for target tracking and elimination
+- **Tactical Aesthetics**: Military/spy-inspired visual language
+- **Real-time Updates**: Components optimized for live game data
+- **Safety Features**: Clear visual hierarchy for emergency functions
+- **Social Gaming**: Components for leaderboards and player interaction
 
 ## 📖 Documentation
 
-- **[Complete Design System](docs/design-system.md)** - Full design system specification
-- **[Storybook Guide](docs/storybook-guide.md)** - Implementation and usage guide
-- **[UI Kit Implementation](docs/ui-kit-implementation.md)** - Detailed component guide
-- **[Example README](example/README.md)** - Interactive demo documentation
-
-## 🔄 Development Workflow
-
-1. **Design in Figma** → Define tokens and component states
-2. **Extract Tokens** → Update design tokens in code
-3. **Build Components** → Create React Native components
-4. **Test in Storybook** → Interactive component testing
-5. **Implement in App** → Use components in actual screens
-
-## 🎯 Key Features
-
-- ✅ **Figma Integration**: Direct extraction from design files
-- ✅ **React Native Ready**: Mobile-first component library
-- ✅ **Interactive Testing**: Live Storybook demo
-- ✅ **Game Context**: Assassin game-specific components
-- ✅ **Design Tokens**: Consistent styling system
-- ✅ **Documentation**: Comprehensive guides and examples
-
-## 🔗 Links
-
-- **Repository**: [GitHub](https://github.com/sethdford/lag-secret-assassin-design)
-- **Interactive Demo**: Run `npm run example` to start
-- **Design Documentation**: [docs/design-system.md](docs/design-system.md)
+- [Component Library](./docs/components.md)
+- [Design Tokens](./docs/tokens.md)
+- [Usage Guidelines](./docs/guidelines.md)
+- [Contributing](./docs/contributing.md)
 
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
-3. Make changes to design tokens or components
-4. Test in the example Storybook
-5. Update documentation
-6. Submit a pull request
+3. Make your changes
+4. Add tests and documentation
+5. Submit a pull request
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+## 🎯 Roadmap
+
+- [ ] Additional tactical components (maps, notifications)
+- [ ] Animation library for cinematic effects
+- [ ] Accessibility enhancements
+- [ ] Dark/light theme variants
+- [ ] Component testing suite
+- [ ] Figma design tokens sync
 
 ---
 
-**Built with ❤️ for the LAG Secret Assassin Game** 
+Built with ❤️ for the ultimate campus gaming experience. 

@@ -1,0 +1,56 @@
+{
+  "figma": {
+    "fileKey": "YOUR_FIGMA_FILE_KEY",
+    "accessToken": "YOUR_FIGMA_ACCESS_TOKEN",
+    "teamId": "YOUR_TEAM_ID"
+  },
+  "export": {
+    "designTokens": {
+      "enabled": true,
+      "outputPath": "./src/generated/DesignTokens.swift",
+      "format": "swift",
+      "includeComments": true,
+      "colorFormat": "hex"
+    },
+    "components": {
+      "enabled": true,
+      "outputPath": "./src/generated/components/",
+      "format": "swift",
+      "includeTests": true,
+      "includePreviews": true,
+      "templatePath": "./templates/"
+    },
+    "assets": {
+      "enabled": true,
+      "outputPath": "./src/generated/assets/",
+      "formats": ["png", "svg"],
+      "scales": [1, 2, 3],
+      "optimize": true
+    },
+    "documentation": {
+      "enabled": true,
+      "outputPath": "./docs/generated/",
+      "includeUsageExamples": true,
+      "includeAccessibilityNotes": true
+    }
+  },
+  "sync": {
+    "autoSync": false,
+    "syncInterval": "daily",
+    "createPullRequest": true,
+    "notifySlack": true,
+    "slackChannel": "#design-system"
+  },
+  "validation": {
+    "enforceNamingConventions": true,
+    "checkColorContrast": true,
+    "validateAccessibility": true,
+    "requireDocumentation": true
+  },
+  "filters": {
+    "includePages": ["Design System", "Components", "Tokens"],
+    "excludePages": ["Archive", "Experiments"],
+    "componentPrefix": "DS/",
+    "tokenPrefix": "Token/"
+  }
+} 

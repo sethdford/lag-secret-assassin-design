@@ -1,0 +1,275 @@
+{
+  "dashboard": {
+    "title": "Assassin Game Design System",
+    "subtitle": "Project Management Dashboard",
+    "refreshInterval": 300000,
+    "theme": "tactical",
+    "timezone": "America/New_York"
+  },
+  "metrics": {
+    "enabled": true,
+    "updateFrequency": "daily",
+    "retentionDays": 90,
+    "alerts": {
+      "testCoverageThreshold": 80,
+      "buildTimeThreshold": 60000,
+      "lintingErrorThreshold": 5,
+      "velocityDropThreshold": 20
+    }
+  },
+  "integrations": {
+    "figma": {
+      "enabled": true,
+      "syncFrequency": "daily",
+      "fileId": "${FIGMA_FILE_ID}",
+      "teamId": "${FIGMA_TEAM_ID}"
+    },
+    "github": {
+      "enabled": true,
+      "repository": "lag-secret-assassin-design",
+      "owner": "${GITHUB_OWNER}",
+      "trackPRs": true,
+      "trackIssues": true,
+      "trackReleases": true
+    },
+    "slack": {
+      "enabled": true,
+      "webhookUrl": "${SLACK_WEBHOOK_URL}",
+      "channels": {
+        "general": "#design-system-general",
+        "alerts": "#design-system-alerts",
+        "dev": "#design-system-dev"
+      },
+      "notifications": {
+        "dailyMetrics": true,
+        "weeklyReport": true,
+        "criticalAlerts": true,
+        "buildFailures": true
+      }
+    },
+    "jira": {
+      "enabled": false,
+      "baseUrl": "${JIRA_BASE_URL}",
+      "projectKey": "${JIRA_PROJECT_KEY}",
+      "trackSprints": true,
+      "trackVelocity": true
+    }
+  },
+  "reports": {
+    "weekly": {
+      "enabled": true,
+      "schedule": "0 9 * * 1",
+      "recipients": ["team-leads@company.com"],
+      "includeMetrics": true,
+      "includeRoadmap": true,
+      "includeRisks": true
+    },
+    "monthly": {
+      "enabled": true,
+      "schedule": "0 9 1 * *",
+      "recipients": ["stakeholders@company.com"],
+      "includeExecutiveSummary": true,
+      "includeROI": true,
+      "includeRecommendations": true
+    },
+    "quarterly": {
+      "enabled": true,
+      "schedule": "0 9 1 1,4,7,10 *",
+      "recipients": ["executives@company.com"],
+      "includeStrategicReview": true,
+      "includeRoadmapUpdate": true,
+      "includeResourcePlanning": true
+    }
+  },
+  "widgets": [
+    {
+      "id": "sprint-progress",
+      "type": "progress",
+      "title": "Current Sprint Progress",
+      "size": "large",
+      "position": { "row": 1, "col": 1, "width": 2, "height": 1 },
+      "dataSource": "github",
+      "refreshInterval": 300000
+    },
+    {
+      "id": "test-coverage",
+      "type": "gauge",
+      "title": "Test Coverage",
+      "size": "medium",
+      "position": { "row": 1, "col": 3, "width": 1, "height": 1 },
+      "dataSource": "metrics",
+      "thresholds": { "warning": 80, "critical": 70 }
+    },
+    {
+      "id": "build-status",
+      "type": "status",
+      "title": "Build Status",
+      "size": "medium",
+      "position": { "row": 1, "col": 4, "width": 1, "height": 1 },
+      "dataSource": "github"
+    },
+    {
+      "id": "component-count",
+      "type": "counter",
+      "title": "Components",
+      "size": "small",
+      "position": { "row": 2, "col": 1, "width": 1, "height": 1 },
+      "dataSource": "metrics"
+    },
+    {
+      "id": "figma-sync",
+      "type": "timestamp",
+      "title": "Last Figma Sync",
+      "size": "small",
+      "position": { "row": 2, "col": 2, "width": 1, "height": 1 },
+      "dataSource": "figma"
+    },
+    {
+      "id": "team-velocity",
+      "type": "chart",
+      "title": "Team Velocity",
+      "size": "large",
+      "position": { "row": 2, "col": 3, "width": 2, "height": 1 },
+      "dataSource": "github",
+      "chartType": "line",
+      "timeRange": "30d"
+    },
+    {
+      "id": "open-issues",
+      "type": "list",
+      "title": "Open Issues",
+      "size": "medium",
+      "position": { "row": 3, "col": 1, "width": 2, "height": 1 },
+      "dataSource": "github",
+      "limit": 5
+    },
+    {
+      "id": "recent-prs",
+      "type": "list",
+      "title": "Recent Pull Requests",
+      "size": "medium",
+      "position": { "row": 3, "col": 3, "width": 2, "height": 1 },
+      "dataSource": "github",
+      "limit": 5
+    },
+    {
+      "id": "quality-metrics",
+      "type": "scorecard",
+      "title": "Quality Scorecard",
+      "size": "large",
+      "position": { "row": 4, "col": 1, "width": 4, "height": 1 },
+      "dataSource": "metrics",
+      "metrics": [
+        "testCoverage",
+        "lintingScore",
+        "accessibilityScore",
+        "performanceScore"
+      ]
+    }
+  ],
+  "customization": {
+    "colors": {
+      "primary": "#DC143C",
+      "secondary": "#1E3A8A",
+      "accent": "#10B981",
+      "warning": "#F59E0B",
+      "error": "#EF4444",
+      "success": "#10B981",
+      "background": "#0F172A",
+      "surface": "#1E293B",
+      "text": "#F8FAFC"
+    },
+    "fonts": {
+      "primary": "SF Pro Display",
+      "secondary": "SF Pro Text",
+      "monospace": "SF Mono"
+    },
+    "layout": {
+      "gridColumns": 4,
+      "gridRows": 4,
+      "gap": 16,
+      "padding": 24
+    }
+  },
+  "permissions": {
+    "roles": {
+      "admin": {
+        "canEditDashboard": true,
+        "canViewAllMetrics": true,
+        "canManageIntegrations": true,
+        "canExportData": true
+      },
+      "lead": {
+        "canEditDashboard": false,
+        "canViewAllMetrics": true,
+        "canManageIntegrations": false,
+        "canExportData": true
+      },
+      "developer": {
+        "canEditDashboard": false,
+        "canViewAllMetrics": true,
+        "canManageIntegrations": false,
+        "canExportData": false
+      },
+      "stakeholder": {
+        "canEditDashboard": false,
+        "canViewAllMetrics": false,
+        "canManageIntegrations": false,
+        "canExportData": false
+      }
+    },
+    "users": {
+      "admin@company.com": "admin",
+      "tech-lead@company.com": "lead",
+      "design-lead@company.com": "lead"
+    }
+  },
+  "automation": {
+    "healthChecks": {
+      "enabled": true,
+      "frequency": "hourly",
+      "checks": [
+        "buildStatus",
+        "testResults",
+        "figmaSync",
+        "deploymentStatus"
+      ]
+    },
+    "alerts": {
+      "enabled": true,
+      "channels": ["slack", "email"],
+      "rules": [
+        {
+          "name": "Build Failure",
+          "condition": "buildStatus == 'failed'",
+          "severity": "critical",
+          "cooldown": 300
+        },
+        {
+          "name": "Test Coverage Drop",
+          "condition": "testCoverage < 80",
+          "severity": "warning",
+          "cooldown": 3600
+        },
+        {
+          "name": "High Linting Errors",
+          "condition": "lintingErrors > 10",
+          "severity": "warning",
+          "cooldown": 1800
+        },
+        {
+          "name": "Figma Sync Failure",
+          "condition": "figmaSyncAge > 86400",
+          "severity": "warning",
+          "cooldown": 3600
+        }
+      ]
+    },
+    "dataRetention": {
+      "metrics": "90d",
+      "logs": "30d",
+      "reports": "1y",
+      "snapshots": "30d"
+    }
+  }
+} 

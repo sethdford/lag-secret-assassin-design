@@ -1,0 +1,379 @@
+name: Design System CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run daily to check for Figma updates
+    - cron: '0 9 * * *'
+
+env:
+  FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+  FIGMA_FILE_KEY: ${{ secrets.FIGMA_FILE_KEY }}
+
+jobs:
+  # Check for Figma updates and sync design tokens
+  figma-sync:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || contains(github.event.head_commit.message, '[figma-sync]')
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Export design tokens from Figma
+      run: |
+        node scripts/figma-export.js
+        echo "FIGMA_CHANGES=$(git diff --name-only | wc -l)" >> $GITHUB_ENV
+    
+    - name: Generate components from Figma
+      if: env.FIGMA_CHANGES != '0'
+      run: node scripts/component-generator.js
+    
+    - name: Generate documentation
+      if: env.FIGMA_CHANGES != '0'
+      run: node scripts/docs-generator.js
+    
+    - name: Create Pull Request
+      if: env.FIGMA_CHANGES != '0'
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: 'feat: sync design tokens and components from Figma'
+        title: 'Auto-sync: Figma design updates'
+        body: |
+          ## Automated Figma Sync
+          
+          This PR contains updates from the Figma design system:
+          
+          ### Changes
+          - Updated design tokens
+          - Generated new/updated components
+          - Refreshed documentation
+          
+          ### Review Checklist
+          - [ ] Verify design token changes are correct
+          - [ ] Test generated components
+          - [ ] Check visual regression tests
+          - [ ] Validate documentation updates
+        branch: figma-sync-${{ github.run_number }}
+        delete-branch: true
+
+  # Build and test the design system
+  build-and-test:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install Node dependencies
+      run: npm ci
+    
+    - name: Cache Swift packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          .build
+          ~/Library/Developer/Xcode/DerivedData
+        key: ${{ runner.os }}-swift-${{ hashFiles('Package.swift') }}
+        restore-keys: |
+          ${{ runner.os }}-swift-
+    
+    - name: Build Swift Package
+      run: swift build
+    
+    - name: Run Swift tests
+      run: swift test
+    
+    - name: Run visual regression tests
+      run: |
+        xcodebuild test \
+          -scheme AssassinGameDesignSystem \
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+          -testPlan VisualRegressionTests
+    
+            - name: Generate documentation
+          run: npm run docs:build
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results
+        path: |
+          .build/test-results/
+          TestResults/
+    
+    - name: Upload visual regression snapshots
+      uses: actions/upload-artifact@v3
+      if: failure()
+      with:
+        name: visual-regression-failures
+        path: |
+          **/__Snapshots__/
+          **/FailureDiffs/
+
+  # Quality checks and linting
+  quality-checks:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Lint Swift code
+      run: |
+        # Install SwiftLint if not available
+        if ! command -v swiftlint &> /dev/null; then
+          brew install swiftlint
+        fi
+        swiftlint lint --reporter github-actions-logging
+    
+    - name: Check design token consistency
+      run: node scripts/validate-tokens.js
+    
+    - name: Validate component documentation
+      run: node scripts/validate-docs.js
+    
+    - name: Check accessibility compliance
+      run: node scripts/accessibility-check.js
+
+  # Deploy documentation and design system
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build-and-test, quality-checks]
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build documentation site
+      run: |
+        npm run docs:build
+                    npm run docs:build
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
+        cname: design-system.assassingame.com
+    
+    - name: Create release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Design System ${{ github.ref }}
+        body: |
+          ## Design System Release
+          
+          ### What's New
+          - Updated components and design tokens
+          - Enhanced documentation
+          - Bug fixes and improvements
+          
+          ### Installation
+          ```swift
+          .package(url: "https://github.com/assassin-game/design-system", from: "${{ github.ref }}")
+          ```
+        draft: false
+        prerelease: false
+
+  # Generate project metrics and reports
+  metrics:
+    runs-on: ubuntu-latest
+    needs: [build-and-test, quality-checks]
+    if: always()
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Generate project metrics
+      run: |
+        npm run metrics:generate
+        echo "METRICS_GENERATED=true" >> $GITHUB_ENV
+    
+    - name: Upload metrics artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: project-metrics
+        path: |
+          docs/metrics/
+    
+    - name: Check quality gates
+      run: |
+        npm run quality:gate
+        echo "QUALITY_GATE_PASSED=true" >> $GITHUB_ENV
+
+  # Notify design team of changes
+  notify:
+    runs-on: ubuntu-latest
+    needs: [deploy, metrics]
+    if: always()
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Download metrics
+      uses: actions/download-artifact@v3
+      with:
+        name: project-metrics
+        path: docs/metrics/
+    
+    - name: Notify Slack with enhanced metrics
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        channel: '#design-system-alerts'
+        webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        custom_payload: |
+          {
+            "attachments": [
+              {
+                "color": "${{ job.status == 'success' && 'good' || job.status == 'failure' && 'danger' || 'warning' }}",
+                "blocks": [
+                  {
+                    "type": "header",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🎯 Design System CI Report"
+                    }
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Status:* ${{ job.status }}"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Branch:* ${{ github.ref_name }}"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Commit:* <${{ github.event.head_commit.url }}|${{ github.sha }}>"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Author:* ${{ github.actor }}"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "*Quality Gates:* ${{ needs.metrics.outputs.QUALITY_GATE_PASSED == 'true' && '✅ Passed' || '❌ Failed' }}"
+                    }
+                  },
+                  {
+                    "type": "actions",
+                    "elements": [
+                      {
+                        "type": "button",
+                        "text": {
+                          "type": "plain_text",
+                          "text": "View Workflow"
+                        },
+                        "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                      },
+                      {
+                        "type": "button",
+                        "text": {
+                          "type": "plain_text",
+                          "text": "View Metrics"
+                        },
+                        "url": "${{ github.server_url }}/${{ github.repository }}/blob/main/docs/metrics/metrics-dashboard.html"
+                      },
+                      {
+                        "type": "button",
+                        "text": {
+                          "type": "plain_text",
+                          "text": "View Documentation"
+                        },
+                        "url": "https://design-system.assassingame.com"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+    
+    - name: Update project status in GitHub
+      run: |
+        gh api repos/${{ github.repository }}/statuses/${{ github.sha }} \
+          --method POST \
+          --field state="${{ job.status == 'success' && 'success' || 'failure' }}" \
+          --field target_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+          --field description="Design System CI: ${{ job.status }}" \
+          --field context="design-system/ci"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Update Figma comment
+      if: env.FIGMA_CHANGES != '0'
+      run: |
+        curl -X POST "https://api.figma.com/v1/files/$FIGMA_FILE_KEY/comments" \
+          -H "X-Figma-Token: $FIGMA_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "message": "✅ Design system updated successfully!\n\n📊 **Metrics**: View latest project metrics\n🚀 **Deployment**: https://design-system.assassingame.com\n💻 **Commit**: ${{ github.sha }}\n\n*Quality Gates: ${{ needs.metrics.outputs.QUALITY_GATE_PASSED == 'true' && 'Passed ✅' || 'Failed ❌' }}*",
+            "client_meta": {
+              "x": 100,
+              "y": 100
+            }
+          }' 

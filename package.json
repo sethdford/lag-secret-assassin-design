@@ -1,36 +1,86 @@
 {
-  "name": "lag-secret-assassin-design",
+  "name": "assassin-game-design-system",
   "version": "1.0.0",
-  "description": "Design system and documentation for the LAG Secret Assassin game",
+  "description": "Advanced automated design system for Assassin Game iOS app with Figma integration",
   "main": "index.js",
-  "directories": {
-    "doc": "docs",
-    "example": "example"
-  },
   "scripts": {
-    "example": "cd example && npm start",
-    "example:install": "cd example && npm install --legacy-peer-deps",
-    "example:ios": "cd example && npm run ios",
-    "example:android": "cd example && npm run android",
-    "example:web": "cd example && npm run web"
+    "test": "jest",
+    "figma:export": "node scripts/figma-export.js",
+    "figma:export-tokens": "node scripts/figma-export.js --tokens-only",
+    "figma:export-components": "node scripts/figma-export.js --components-only",
+    "figma:export-assets": "node scripts/figma-export.js --assets-only",
+    "generate:components": "node scripts/component-generator.js",
+    "generate:docs": "node scripts/docs-generator.js",
+    "docs:build": "node scripts/docs-generator.js",
+    "docs:serve": "echo 'Open docs/advanced-workflow-guide.md or generated documentation'",
+    "validate:tokens": "node scripts/validate-tokens.js",
+    "validate:docs": "node scripts/validate-docs.js",
+    "accessibility:check": "node scripts/accessibility-check.js",
+    "visual:test": "swift test --filter VisualRegressionTests",
+    "visual:record": "RECORD_SNAPSHOTS=true swift test --filter VisualRegressionTests",
+    "lint:swift": "swiftlint lint",
+    "lint:fix": "swiftlint lint --fix",
+    "dev": "npm run dev:watch",
+    "figma:watch": "nodemon --watch figma.config.json --exec \"npm run figma:export\"",
+    "release": "standard-version && git push --follow-tags origin main",
+    "metrics:generate": "node scripts/project-metrics.js",
+    "metrics:dashboard": "npm run metrics:generate && open docs/metrics/metrics-dashboard.html",
+    "metrics:report": "npm run metrics:generate && cat docs/metrics/metrics-report.md",
+    "project:status": "npm run metrics:generate && echo '📊 Project status updated'",
+    "project:health": "npm run lint:swift && npm run test && npm run metrics:generate",
+    "sprint:start": "echo '🚀 Starting new sprint' && npm run project:health",
+    "sprint:end": "npm run metrics:generate && echo '📋 Sprint completed - check metrics'",
+    "team:standup": "npm run metrics:report | head -20",
+    "team:velocity": "git log --since='2 weeks ago' --oneline | wc -l",
+    "roadmap:update": "echo '🗺️ Update roadmap at docs/project-management/roadmap.md'",
+    "issues:summary": "gh issue list --state open --json title,labels,assignees || echo 'GitHub CLI not available'",
+    "pr:summary": "gh pr list --state open --json title,author,reviewRequests || echo 'GitHub CLI not available'",
+    "workflow:status": "gh run list --limit 5 || echo 'GitHub CLI not available'",
+    "dependencies:check": "npm audit && echo 'Dependencies checked'",
+    "quality:gate": "npm run lint:swift && npm run test && npm run accessibility:check",
+    
+    "storyboard:generate": "node scripts/figma-to-storyboard.js",
+    "storyboard:sample": "node scripts/figma-to-storyboard.js --sample",
+    "xcode:generate": "node scripts/xcode-project-generator.js",
+    "xcode:open": "open xcode-templates/AssassinDesignSystem.xcodeproj",
+    "preview:showcase": "echo 'Open src/components/previews/SimpleDesignShowcase.swift in Xcode'",
+    "storyboard:clean": "rm -rf storyboard-output && rm -rf xcode-templates",
+    
+    "components:analyze": "node scripts/figma-component-analyzer.js",
+    "components:generate": "node scripts/figma-component-analyzer.js --generate",
+    "tokens:sync": "node scripts/design-token-sync.js",
+    "tokens:watch": "node scripts/design-token-sync.js --watch",
+    "tokens:generate": "node scripts/design-token-sync.js --generate-sample",
+    "test:ui": "xcodebuild test -scheme AssassinDesignSystemTests -destination 'platform=iOS Simulator,name=iPhone 14'",
+    "test:accessibility": "xcodebuild test -scheme AccessibilityTests -destination 'platform=iOS Simulator,name=iPhone 14'",
+    "test:performance": "xcodebuild test -scheme PerformanceTests -destination 'platform=iOS Simulator,name=iPhone 14'",
+    "test:visual": "xcodebuild test -scheme VisualRegressionTests -destination 'platform=iOS Simulator,name=iPhone 14'",
+    "test:all": "npm run test:ui && npm run test:accessibility && npm run test:performance && npm run test:visual",
+    "dev:watch": "concurrently \"npm run tokens:watch\" \"npm run components:analyze\" \"npm run figma:watch\"",
+    "dev:setup": "npm run tokens:generate && npm run components:generate && npm run storyboard:sample",
+    "build:components": "npm run components:analyze && npm run tokens:sync && npm run storyboard:generate",
+    "build:all": "npm run build:components && npm run xcode:generate && npm run docs:generate"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sethdford/lag-secret-assassin-design.git"
+  "keywords": [
+    "ios",
+    "swift",
+    "design-system",
+    "figma-automation",
+    "swiftui",
+    "assassin-game",
+    "tactical-ui"
+  ],
+  "author": "Assassin Game Team",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "concurrently": "^8.2.0",
+    "nodemon": "^3.1.0",
+    "axios": "^1.7.0",
+    "fs-extra": "^11.1.1",
+    "chalk": "^5.3.0"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/sethdford/lag-secret-assassin-design/issues"
-  },
-  "homepage": "https://github.com/sethdford/lag-secret-assassin-design#readme",
   "dependencies": {
-    "@react-native/babel-preset": "^0.79.3",
-    "@react-native/metro-config": "^0.79.3",
-    "expo": "^53.0.10",
-    "react": "^19.1.0",
-    "react-native": "^0.79.3"
+    "figma-api": "^2.0.2-beta"
   }
 }
