@@ -2,7 +2,7 @@ import SwiftUI
 
 /// Design Tokens - Auto-generated from Figma
 /// Central access point for all design system tokens
-/// Last updated: 2025-06-07T18:29:45.717Z
+/// Last updated: 2025-06-07T18:31:45.724Z
 
 struct DesignTokens {
     

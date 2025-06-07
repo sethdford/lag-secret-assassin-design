@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Design System Spacing - Auto-generated from Figma
-/// Last updated: 2025-06-07T18:29:45.717Z
+/// Last updated: 2025-06-07T18:31:45.723Z
 extension CGFloat {
     
     // MARK: - Tactical Spacing Scale

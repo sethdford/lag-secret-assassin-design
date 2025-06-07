@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Design System Typography - Auto-generated from Figma
-/// Last updated: 2025-06-07T18:29:45.716Z
+/// Last updated: 2025-06-07T18:31:45.723Z
 extension Font {
     
     // MARK: - Tactical Typography Scale

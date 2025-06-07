@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Design System Colors - Auto-generated from Figma
-/// Last updated: 2025-06-07T18:29:45.716Z
+/// Last updated: 2025-06-07T18:31:45.722Z
 extension Color {
     
     // MARK: - Tactical Color Palette
